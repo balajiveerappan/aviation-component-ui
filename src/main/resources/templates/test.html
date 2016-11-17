@@ -212,8 +212,8 @@ img {
 					<!-- <button class="filebtn list-cust-btn">File</button> -->
 					<!-- <button class="statbtn list-cust-btn">Statistics</button> -->
 					<input type="button" onclick="printDiv('visualization')"
-						value="File" class="filebtn list-clear-btn"> <input
-						type="button" value="Statistics" class="statbtn list-clear-btn">
+						value="File" class="filebtn list-clear-btn"/> <input
+						type="button" value="Statistics" class="statbtn list-clear-btn"/>
 				</div>
 
 				<label class="right_label">Component Removal History</label>
@@ -251,7 +251,7 @@ img {
 						</tr>
 						<tr>
 							<td><input type="radio" name="filter" id="worstFirst"
-								onchange="onChangeRadioButton()" checked /></td>
+								onchange="onChangeRadioButton()" checked="checked" /></td>
 							<td><label>Worst First</label></td>
 						</tr>
 					</table>
@@ -265,7 +265,7 @@ img {
 							<tr>
 								<td style="padding-left: 8px; padding-top: 3px;"><input
 									type="checkbox" name="instperbar" id="instperbar"
-									checked="true" disabled="disabled" hidden="true" /></td>
+									checked="checked" disabled="disabled" hidden="true" /></td>
 
 								<td><label id="tab-caption"
 									style="border-bottom: 1px solid; width: 100%; border-bottom-color: black; padding-left: 4px !important; padding-bottom: 0px !important;">Installation
@@ -294,7 +294,7 @@ img {
 						<table>
 							<tr>
 								<td style="padding-left: 8px; padding-top: 3px;"><input
-									type="checkbox" name="remperbar" id="remperbar" checked="true" /></td>
+									type="checkbox" name="remperbar" id="remperbar" checked="checked" /></td>
 
 								<td><label id="tab-caption"
 									style="border-bottom: 1px solid; width: 100%; border-bottom-color: black; padding-left: 4px !important; padding-bottom: 0px !important;">Removal
@@ -356,13 +356,13 @@ img {
 			<div class="col-sm-3"></div>
 			<div class="col-sm-2" style="padding-bottom: 10px;">
 				<input type="button" class="btn btn-primary" value="<< Previous"
-					id="previous" onclick="onPageLoad('-1')">
+					id="previous" onclick="onPageLoad('-1')"/>
 			</div>
 			<div class="col-sm-5"></div>
 			<div class="col-sm-2" style="padding-bottom: 10px;">
 				<!-- <input type="button" class="form-control" class="btn btn-primary"  value="Next >>"  id="next" onclick="pagination('1')"> -->
 				<input type="button" class="btn btn-primary" value="Next >>"
-					id="next" onclick="onPageLoad('1')">
+					id="next" onclick="onPageLoad('1')"/>
 			</div>
 		</div>
 	</div>
