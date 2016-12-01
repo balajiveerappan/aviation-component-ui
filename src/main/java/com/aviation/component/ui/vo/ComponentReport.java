@@ -5,7 +5,9 @@ import java.util.List;
 public class ComponentReport {
 	private  List<ComponentHistoryGroupVO> groupList ;
 	
-	List<HisotryComponenItemVO> itemList ;
+	private List<HisotryComponenItemVO> itemList ;
+	
+	
 
 	public List<ComponentHistoryGroupVO> getGroupList() {
 		return groupList;

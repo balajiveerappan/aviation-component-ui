@@ -11,12 +11,13 @@
 
 <!-- <script -->
 
-<script src="/js/jquery.qtip.min.js"></script>
-<script src="/js/menu.js"></script>
 
-<script src="/js/test.js"></script>
+<!-- <script src="/js/menu.js"></script> -->
+
+<script src="js/test.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script	src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.qtip.min.js"></script>
 <script type="text/javascript"	src="http://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript"	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -25,8 +26,9 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css"	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/js/jquery-ui.js"></script>
 <script src="/js/Utility.js"></script>
+<script src="js/html2canvas.js"></script>
 <style>
 .black_overlay {
 	display: none;
@@ -116,7 +118,7 @@ body, html {
 	height: 0px;
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
-	border-top: 20px solid #8BC34A;
+	border-top: 20px solid red;
 	margin-left: 7px;
 }
 
@@ -164,192 +166,316 @@ body, html {
 img {
 	vertical-align: top;
 }
+
+.triangleImage {
+	z-index: 150;
+}
+
+div#filterName {
+	font-size: 20px;
+	padding-bottom: 19px;
+	display: none;
+}
+
+div#description {
+	font-size: 20px;
+	padding-bottom: 19px;
+	display: none;
+}
 </style>
+
 
 <!-- <script src="../../Code/vis/dist/vis.js"></script> -->
 <!-- <link href="../../Code/vis/dist/vis.css" rel="stylesheet" type="text/css" /> -->
 <!-- <script src="../vis/examples/googleAnalytics.js"></script> -->
 </head>
-<body onload="removal('0')">
+<body onload="onloadGetData();">
 
 	<!-- Top Logo Header -->
 	<nav id="home" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="navbar-header">
+			<div class="navbar-header" style="width: 62%;">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Aviation</a>
+				<img alt="client" src="img/logo.png" height="60px" width="235px"
+					style="margin-left: -811px"/> <img alt="client"
+					src="img/fedex.png" height="60px" width="200px"></img>
+				<label class="navbar-brand"
+					style="margin-left: 420px; margin-bottom: -17px;">Component
+					Removal History</label> <label></label>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="afterLogin.html">HOME</a></li>
+					<li><a href="/home" style="font-size: 16px;">Home</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="font-size: 16px;">File <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Save As PDF</a></li>
+							<li><a id="test" href="#" onclick="exportToExcel()">Save
+									As Excel</a></li>
+							<li><a  onclick="printDiv()">Print</a></li>
+
+						</ul></li>
 
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Menu <span class="caret"></span>
+						data-toggle="dropdown" href="#" style="font-size: 16px;">Menu <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
 
-							<li><a href="Unit_Filter.html">Filter Editor</a></li>
-							<li><a href="Splash_Screen.html">Component Analysis</a></li>
+							<li><a href="/aviation-settings/filter" >Filter Editor</a></li>
+							<li><a href="/aviation-settings/splash" >Component Analysis</a></li>
 						</ul></li>
 
-					<li><a href="index.html" id="logout">LOGOUT</a></li>
+					<li><a href="/" id="logout" style="font-size: 16px;">Logout</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- End of Top Logo Header -->
 
-	<form action="">
-		<br/>
-		<br/>
-		<br/>
-		<div class="main_content bgclass">
-			<div style='text-align: center'>
-				<!-- div for button alignment -->
-				<div class="btndiv">
-					<!-- <button class="filebtn list-cust-btn">File</button> -->
-					<!-- <button class="statbtn list-cust-btn">Statistics</button> -->
-					<input type="button" onclick="printDiv('visualization')"
-						value="File" class="filebtn list-clear-btn"/> <input
-						type="button" value="Statistics" class="statbtn list-clear-btn"/>
-				</div>
 
-				<label class="right_label">Component Removal History</label>
-			</div>
+<br/><br/><br/>
+<div class="main_content bgclass" id="">
+<div style='text-align:center'>
+		<!-- div for button alignment -->
+		<!-- <div class="btndiv">-->
+		<!-- <button class="filebtn list-cust-btn">File</button> -->
+		<!-- <button class="statbtn list-cust-btn">Statistics</button> -->
+		  <div class="dropdown">
+		<!-- <input type="button" onclick="printDiv('printDiv')" value="File" class="filebtn list-clear-btn"> --> 
+		    <!-- <input class="filebtn list-clear-btn" type="button" value="File" data-toggle="dropdown">
+		<ul class="dropdown-menu">
+      <li><a href="#">Save As PDF</a></li>
+      <li><a href="#">Print</a></li>
+      
+    </ul>
+		
+		<input type="button" value="Statistics" class="statbtn list-clear-btn">
 		</div>
-		<div class="main_left">
+		</div>-->
+		
+		<!-- <label class="right_label">Component Removal History</label>--></div></div>
+		
+	<div class="main_left">
+		
+		<div class="left_p1" style="margin-top:-7px;">
 
-			<div class="left_p1">
-				<hr id="date_line"/>
-				<div class="form-group date-range ">
-					<!-- <center><label for="dateRange" class="label_date" style="color: brown;">Extract Date</label></center> -->
-					<div class="date_range_select ">
-						<label for="fromDate" class="label_date">Extract Date</label> <input
-							type="text" class="form-control" style="margin-bottom: 4px;"
-							id="currentDate" readonly="readonly" /> <label for="dateRange"
-							class="label_date">Date Range</label> <input type="text"
-							class="form-control" style="margin-bottom: 4px;" id="dateRange"
-							readonly="readonly" />
-					</div>
+		<div id="graphFilter">
+		<hr id="date_line" />	
+		<div class="form-group date-range ">
+			<!-- <center><label for="dateRange" class="label_date" style="color: brown;">Extract Date</label></center> -->
+				<div class="date_range_select ">
+			<label for="fromDate" class="label_date" >Extract Date</label> 
+			<input type="text"	class="form-control" style="margin-bottom: 4px; width: 200px;" id="currentDate"  readonly="readonly" />
+			<label	for="dateRange" class="label_date">Date Range</label> 
+							 <input type="text"	class="form-control" style="width: 200px;margin-bottom: 4px;" id="dateRange" readonly="readonly" />
+					<!-- <script type="text/javascript"> -->
+						<!-- $(function() { -->
 
-				</div>
+						  <!-- $('input[name="datefilter"]').daterangepicker({ -->
+							  <!-- autoUpdateInput: false, -->
+							  <!-- locale: { -->
+								  <!-- cancelLabel: 'Clear' -->
+							  <!-- } -->
+						  <!-- }); -->
 
-				<hr id="analysisByLine"/>
-				<div>
-					<div class="checkbox filter-checkbox form-group filter_left2_p2">
-						<label id="tab-caption"
-							style="border-bottom: 1px solid; width: 33%; border-bottom-color: black; padding-left: 2%;">Analysis
-							By</label>
-					</div>
-					<table style="margin-left: 10px;">
-						<tr>
-							<td><input type="radio" name="filter" id="bestFirst"
-								onchange="onChangeRadioButton()" /></td>
-							<td><label>Best First</label></td>
-						</tr>
-						<tr>
-							<td><input type="radio" name="filter" id="worstFirst"
-								onchange="onChangeRadioButton()" checked="checked" /></td>
-							<td><label>Worst First</label></td>
-						</tr>
-					</table>
-				</div>
+						  <!-- $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) { -->
+							  <!-- $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')); -->
+						  <!-- }); -->
 
+						  <!-- $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) { -->
+							  <!-- $(this).val(''); -->
+						  <!-- }); -->
 
-				<hr id="installationPeriodLine"/>
-				<div>
-					<div class="checkbox filter-checkbox form-group filter_left2_p2">
-						<table>
-							<tr>
-								<td style="padding-left: 8px; padding-top: 3px;"><input
-									type="checkbox" name="instperbar" id="instperbar"
-									checked="checked" disabled="disabled" hidden="true" /></td>
-
-								<td><label id="tab-caption"
-									style="border-bottom: 1px solid; width: 100%; border-bottom-color: black; padding-left: 4px !important; padding-bottom: 0px !important;">Installation
-										Period Bar</label></td>
-							</tr>
-						</table>
-					</div>
-					<table style="margin-left: 10px;">
-						<tr>
-							<td><label>Installed</label></td>
-							<td><div class="button" style="background-color: Blue;"></div></td>
-						</tr>
-						<tr>
-							<td><label>Removed</label></td>
-
-							<td><div class="button" style="background-color: white;"></div></td>
-						</tr>
-					</table>
-				</div>
-
-
-				<hr id="removalPeriodLine"/>
-				<div>
-
-					<div class="checkbox filter-checkbox form-group filter_left2_p2">
-						<table>
-							<tr>
-								<td style="padding-left: 8px; padding-top: 3px;"><input
-									type="checkbox" name="remperbar" id="remperbar" checked="checked" /></td>
-
-								<td><label id="tab-caption"
-									style="border-bottom: 1px solid; width: 100%; border-bottom-color: black; padding-left: 4px !important; padding-bottom: 0px !important;">Removal
-										Event</label></td>
-
-								<td style="padding-left: 16px;"><p
-										class="glyphicon glyphicon-triangle-bottom"
-										style="font-size: 30px; color: red;"></p></td>
-							</tr>
-						</table>
-					</div>
-					<table style="margin-left: 10px;">
-						<tr>
-							<td><label>Scheduled</label></td>
-							<td><div class="triangle"></div></td>
-						</tr>
-						<tr>
-							<td><label>Unscheduled</label></td>
-
-							<td style="padding-left: 6px"><div class="utriangle"></div></td>
-						</tr>
-						<tr>
-							<td><label>Others</label></td>
-
-							<td style="padding-left: 6px"><div class="bcircle button"></div></td>
-						</tr>
-					</table>
-
-				</div>
-
-				<hr id="removalPeriodLine"/>
-				<div style="padding-bottom: 10px;">
-					<input
-						style="padding-bottom: 0; margin-left: 30px; word-wrap: break-word; width: 160px; height: 50px;"
-						name="action" type="button" value="Component Analysis"
-						onclick="splashScreen()" />
-				</div>
-				<div style="padding-bottom: 10px;">
-					<input
-						style="padding-bottom: 0; margin-left: 30px; word-wrap: break-word; width: 160px; height: 50px;"
-						name="action" type="button" value="Filter Editor"
-						onclick="component();" />
-				</div>
+						<!-- }); -->
 
 			</div>
+			
 		</div>
-	</form>
+		
+		
+		
+		
+		<!-- Analysis By Start -->
+		
+		
+		
+				<hr id="analysisByLine" />					
+		<div>
+			<div class="checkbox filter-checkbox form-group filter_left2_p2"> 
+				<label id="tab-caption" style="border-bottom: 1px solid;width: 90%;border-bottom-color: black;padding-left: 2%;">Analysis By</label> 
+			</div>
+			<table style="margin-left:10px;">
+				<tr>
+					<td><input type="radio" name="filter" id ="bestFirst" onchange="onChangeRadioButton()"/></td>
+					<td><label style="padding-left: 10px;">Best First</label></td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="filter" id ="worstFirst" onchange="onChangeRadioButton()" checked="checked"/></td>
+					<td><label style="padding-left: 10px;">Worst First</label></td>
+				</tr>
+ 			</table>
+		</div>
+	
+		<!-- Installastion period bar Start -->
+		
+			<hr id="installationPeriodLine" />
+			<div>
+				<div class="checkbox filter-checkbox form-group filter_left2_p2">
+					<table>
+						<tr>
+							<td style="padding-left: 8px;padding-top: 3px;"><input type="checkbox" name="instperbar" id="instperbar" checked="checked" disabled="disabled"  hidden="true"/></td>
+					
+							<td><label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black; padding-left: 4px !important;padding-bottom: 0px !important;">Installation Period Bar</label></td>
+						</tr>
+ 					</table>
+ 				</div>
+				<table style="margin-left:10px;">
+					<tr>
+						<td><input type="checkbox" name="installedFilter"  id="installedFilter" checked="checked"/></td>
+						<td><label>Installed</label></td>
+						<td style="padding-left: 10px;"><div class="button" style="background-color:Blue;" ></div></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><label>Removed</label></td>
+						<td style="padding-left: 10px;"><div class="button" style="background-color:white;" ></div></td>
+					</tr>
+		<!-- 			<tr>
+						<td><label>Still Installed Box</label></td>
+					
+						<td><div class="button" style="background-color:Pink;"></td>
+					</tr> -->
+				</table>
+			</div>
+		
+		<!-- Installastion period bar END -->
+		
+		
+		<!-- Removal period bar Start -->
+		
+		<hr id="removalPeriodLine" />			
+		<div>
+			
+			<div class="checkbox filter-checkbox form-group filter_left2_p2"> 
+<!-- <label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black;">Removal Period Bar</label>  -->
+				<table>
+					<tr>
+<!-- 						<td style="padding-left: 8px;padding-top: 3px;"><input type="checkbox" name="remperbar"  id="remperbar" checked="true"/></td> -->
+					
+						<td><label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black; padding-left: 4px !important;padding-bottom: 0px !important;">Removal Event</label></td>
+						
+<!-- 						<td style="padding-left: 16px;"><p class="glyphicon glyphicon-triangle-bottom" style="font-size: 30px;color: red;"></p></td> -->
+					</tr>
+				 </table>
+			</div>
+		<table style="margin-left:10px;">
+				<tr>
+					<td><input type="checkbox" name="Sch"  id="Sch" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Scheduled</label></td>
+					<td><div class="triangle" ></div></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="unSch"  id="unSch" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Unscheduled</label></td>
+					<td style="padding-left:6px"><div class="utriangle" ></div></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="oCircle"  id="oCircle" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Others</label></td>
+					<td style="padding-left:6px"><div class="bcircle button" ></div></td>
+				</tr>
+				</table>
 
 
-	<br />
+		</div>
+		
+			</div>
+		
+		<!-- Removal period bar END -->
+		
+		
+		
+		
+		<!-- Analysis By END -->
+		
+		
+		
+<!-- 		<div>
+		<hr id="unitByLine">
+		<input type="string" style="width: 70px;" id="unit" value="Units by">
+		<label id="tab-caption" style="border-bottom: 1px solid;width: 95%;border-bottom-color: black;">Units by</label> 
+		<div class="checkbox filter-checkbox form-group filter_left2_p2">
+			<table class="tab_change">
+				
+				<tr>
+					<td><label><input type="checkbox"
+							name="fleet">Fleet</label></td>
+				</tr>
+
+				<tr>
+				<td><label><input type="checkbox" name="subFleetCheckBox">Sub Fleet</label></td>
+				</tr>
+				<tr>
+				<td><label><input type="checkbox" name="aircraftNumbersCheckBox">Aircraft Numbers</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="cpnCheckBox">CPN</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="mpnCheckBox">MPN</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="ataCodesCheckBox">ATA Codes</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="cpnSerialNumberCheckBox">Component Serial Numbers</label></td>
+			   </tr>
+				</table>
+			</div>
+		</div> -->
+		
+		
+			<hr id="removalPeriodLine" />		
+		<div style="padding-bottom: 10px;"><input style="padding-bottom: 0;margin-left: 30px;word-wrap: break-word;width: 160px;height: 50px;" name="action" type="button" value="Component Analysis" onclick="splashScreen()"/></div>
+		<div style="padding-bottom: 10px;"><input style="padding-bottom: 0;margin-left: 30px;word-wrap: break-word;width: 160px;height: 50px;" name="action" type="button" value="Filter Editor" onclick="component();"/></div>									
+		
+		</div>
+	
+	</div>
+	</div>
+
+
+
+	<br /> 
 	<!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
+<!-- 	<div class="row">
+	<div class="col-sm-9">
+	<div id="filterName">
+		<b>Filter:</b> <span id="selectedFilter"></span>
+	</div>
+	<div id="description">
+		<b>Description:</b> <span id="selectedItem"></span>
+	</div> 
+	</div>
+</div> -->
+<div class="row">
 
-	<div id="visualization"></div>
+<div class="col-sm-9" style="width: 81%;margin-top: -770px;float: right;">
+	<div id="filterName">
+		<b>Filter:</b> <span id="selectedFilter"></span>
+	</div>
+	<div id="description">
+		<b>Description:</b> <span id="selectedItem"></span>
+	</div>
+		<div id="visualization">
+		</div>
+	</div>
+	</div>
 
 
 	<div class="col-sm-12" style="margin-top: 12px;">
@@ -357,17 +483,18 @@ img {
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-2" style="padding-bottom: 10px;">
-				<input type="button" class="btn btn-primary" value="&lt;&lt; Previous"
-					id="previous" onclick="onPageLoad('-1')"/>
+				<input type="button" class="btn btn-primary" value="Previous" id="previous" onclick="onPageLoad('-1')" />
 			</div>
 			<div class="col-sm-5"></div>
 			<div class="col-sm-2" style="padding-bottom: 10px;">
 				<!-- <input type="button" class="form-control" class="btn btn-primary"  value="Next >>"  id="next" onclick="pagination('1')"> -->
-				<input type="button" class="btn btn-primary" value="Next &gt;&gt;"
-					id="next" onclick="onPageLoad('1')"/>
+				<input type="button" class="btn btn-primary" value="Next"
+					id="next" onclick="onPageLoad('1')" />
 			</div>
 		</div>
 	</div>
+	<table id="filterListTable" style="display: none;">
+	</table>
 	<script>
   $( function() {
 	    $(document).tooltip({
