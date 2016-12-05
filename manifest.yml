@@ -1,0 +1,9 @@
+applications:
+- name: aviation-component-ui
+  memory: 1G
+  host: aviation-component-ui-service
+  path: target/aviation-component-ui-0.0.1-SNAPSHOT.jar
+  env:
+    spring.profiles.active: cloud
+  services:
+  - eureka
