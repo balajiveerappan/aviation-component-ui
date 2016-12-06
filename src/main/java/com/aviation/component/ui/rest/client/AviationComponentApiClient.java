@@ -13,7 +13,7 @@ import com.aviation.component.ui.vo.ComponentReport;
 import com.aviation.component.ui.vo.ComponentsPageVO;
 import com.aviation.component.ui.vo.RemovalReportVO;
 
-@FeignClient(name="aviation-component-api", url="http://localhost:8082")
+@FeignClient("aviation-component-api")
 public interface AviationComponentApiClient {
 	
 	
